@@ -1,6 +1,6 @@
 {
-    "declaration": true,
     "compilerOptions": {
+        "declaration": true,
         "jsx": "react-jsx",
         "module": "ESNext",
         "target": "ESNext",
