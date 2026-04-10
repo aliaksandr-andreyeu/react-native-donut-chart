@@ -1,0 +1,12 @@
+{
+    "declaration": true,
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "module": "ESNext",
+        "target": "ESNext",
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "sourceMap": true,
+        "skipLibCheck": true
+    }
+}
