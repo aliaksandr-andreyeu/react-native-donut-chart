@@ -1,0 +1,46 @@
+{
+  "name": "react-native-donut-chart",
+  "version": "0.0.1",
+  "description": "A simple SVG Circle donut chart",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "npx jest --coverage",
+    "lint": "npx eslint .",
+    "lint:fix": "npx eslint . --fix",
+    "prettier": "npx prettier --check .",
+    "postinstall": "npx typesync",
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aliaksandr-andreyeu/react-native-donut-chart.git"
+  },
+  "keywords": [
+    "donut",
+    "doughnut",
+    "chart",
+    "gaps",
+    "react-native",
+    "ios",
+    "android"
+  ],
+  "author": "Aliaksandr Andreyeu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aliaksandr-andreyeu/react-native-donut-chart/issues"
+  },
+  "homepage": "https://github.com/aliaksandr-andreyeu/react-native-donut-chart#readme",
+  "devDependencies": {
+    "@types/react": "19.2.14",
+    "react": "19.2.5",
+    "react-native": "0.85.0",
+    "react-native-svg": "15.15.4",
+    "typescript": "6.0.2",
+    "typesync": "0.14.3"
+  }
+}
