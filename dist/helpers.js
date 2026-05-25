@@ -6,7 +6,9 @@ export const validateSlices = (slices) => {
     }
     slices.forEach((slice, index) => {
         if (typeof slice.percentage !== 'number' || isNaN(slice.percentage)) {
-            throw new Error(`Slice ${index}: percentage must be a valid number`);
+            throw new Error(
+                `Slice ${index}: percentage must be a valid number`
+            );
         }
         if (slice.percentage < 0) {
             throw new Error(`Slice ${index}: percentage cannot be negative`);
@@ -15,8 +17,7 @@ export const validateSlices = (slices) => {
 };
 /** Generates HSL color palette for auto-coloring */
 const generatePalette = (count) => {
-    if (!count)
-        return [];
+    if (!count) return [];
     const palette = [];
     for (let i = 0; i < count; i++) {
         const hue = (i * (360 / count)) % 360;
@@ -42,21 +43,21 @@ export const modifySlices = (data, gap, sort) => {
     const slicesWithGap = [...data]
         .sort(sortFunc)
         .map((slice, index) => ({
-        ...slice,
-        gap: false,
-        color: slice.color || palette[index],
-    }))
+            ...slice,
+            gap: false,
+            color: slice.color || palette[index],
+        }))
         .reduce((acc, item) => {
-        acc.push(item);
-        if (data.length > 1) {
-            acc.push({
-                gap: true,
-                color: 'transparent',
-                percentage: gap,
-            });
-        }
-        return acc;
-    }, []);
+            acc.push(item);
+            if (data.length > 1) {
+                acc.push({
+                    gap: true,
+                    color: 'transparent',
+                    percentage: gap,
+                });
+            }
+            return acc;
+        }, []);
     return slicesWithGap;
 };
 /** Normalizes slices to ensure proper percentage distribution */
@@ -67,18 +68,23 @@ export const normalizeSlices = (slices) => {
         .map((item, originalIndex) => ({ ...item, originalIndex }))
         .filter((item) => !item.gap);
     const nSlices = sliceItems.length;
-    if (nSlices === 0)
-        return slices;
+    if (nSlices === 0) return slices;
     const availablePercentage = 100 - totalGapSum;
     if (availablePercentage < nSlices) {
-        throw new Error(`Not enough percentages in 100% for slices: needed ${nSlices}%, available ${availablePercentage}%`);
+        throw new Error(
+            `Not enough percentages in 100% for slices: needed ${nSlices}%, available ${availablePercentage}%`
+        );
     }
     const availablePool = availablePercentage - nSlices;
-    const slicesPercentageTotal = sliceItems.reduce((sum, item) => sum + item.percentage, 0);
+    const slicesPercentageTotal = sliceItems.reduce(
+        (sum, item) => sum + item.percentage,
+        0
+    );
     const processed = sliceItems.map((item) => {
-        const ratio = slicesPercentageTotal === 0
-            ? 1 / nSlices
-            : item.percentage / slicesPercentageTotal;
+        const ratio =
+            slicesPercentageTotal === 0
+                ? 1 / nSlices
+                : item.percentage / slicesPercentageTotal;
         const precise = ratio * availablePool;
         return {
             ...item,
@@ -104,7 +110,10 @@ export const normalizeSlices = (slices) => {
 /** Creates final donut slice data with angles */
 export const createDonutSlices = (data) => {
     const donutSlices = [];
-    const total = data.reduce((previous, { percentage }) => previous + percentage, 0);
+    const total = data.reduce(
+        (previous, { percentage }) => previous + percentage,
+        0
+    );
     let angle = 0;
     data.forEach(({ percentage, color }) => {
         const percent = percentage / (total || 1);

@@ -1,4 +1,9 @@
-import { validateSlices, modifySlices, normalizeSlices, createDonutSlices, } from '../helpers';
+import {
+    validateSlices,
+    modifySlices,
+    normalizeSlices,
+    createDonutSlices,
+} from '../helpers';
 import { DonutChartSort } from '../types';
 describe('DonutChart Helpers', () => {
     describe('validateSlices', () => {
@@ -13,43 +18,35 @@ describe('DonutChart Helpers', () => {
             expect(() => validateSlices([{ percentage: -10 }])).toThrow();
         });
         it('should accept valid slices', () => {
-            expect(() => validateSlices([{ percentage: 50 }, { percentage: 50 }])).not.toThrow();
+            expect(() =>
+                validateSlices([{ percentage: 50 }, { percentage: 50 }])
+            ).not.toThrow();
         });
         it('should accept zero percentage', () => {
-            expect(() => validateSlices([{ percentage: 0 }, { percentage: 100 }])).not.toThrow();
+            expect(() =>
+                validateSlices([{ percentage: 0 }, { percentage: 100 }])
+            ).not.toThrow();
         });
     });
     describe('modifySlices', () => {
         it('should add gaps between slices', () => {
-            const slices = [
-                { percentage: 50 },
-                { percentage: 50 },
-            ];
+            const slices = [{ percentage: 50 }, { percentage: 50 }];
             const result = modifySlices(slices, 5);
             expect(result.length).toBeGreaterThan(slices.length);
             expect(result.some((s) => s.gap === true)).toBe(true);
         });
         it('should sort in descending order', () => {
-            const slices = [
-                { percentage: 30 },
-                { percentage: 70 },
-            ];
+            const slices = [{ percentage: 30 }, { percentage: 70 }];
             const result = modifySlices(slices, 0, DonutChartSort.DESC);
             expect(result[0].percentage).toBe(70);
         });
         it('should sort in ascending order', () => {
-            const slices = [
-                { percentage: 70 },
-                { percentage: 30 },
-            ];
+            const slices = [{ percentage: 70 }, { percentage: 30 }];
             const result = modifySlices(slices, 0, DonutChartSort.ASC);
             expect(result[0].percentage).toBe(30);
         });
         it('should assign colors to slices', () => {
-            const slices = [
-                { percentage: 50 },
-                { percentage: 50 },
-            ];
+            const slices = [{ percentage: 50 }, { percentage: 50 }];
             const result = modifySlices(slices, 0);
             const coloredSlices = result.filter((s) => !s.gap);
             expect(coloredSlices[0].color).toBeDefined();
