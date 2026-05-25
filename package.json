@@ -11,7 +11,7 @@
         "test": "npx jest --coverage",
         "lint": "npx eslint .",
         "lint:fix": "npx eslint . --fix",
-        "prettier": "prettier --write \"./**/*.{js,jsx,cjs,mjs,ts,tsx,json}\"",
+        "prettier": "npx prettier --write \"./**/*.{js,jsx,cjs,mjs,ts,tsx,json}\"",
         "postinstall": "npx typesync",
         "build": "tsc",
         "prepublishOnly": "npm run build"
