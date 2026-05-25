@@ -3,6 +3,25 @@ import { useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Svg, { Circle, G } from 'react-native-svg';
 import { modifySlices, normalizeSlices, createDonutSlices } from './helpers';
+/**
+ * DonutChart Component
+ *
+ * A lightweight, customizable donut chart component for React Native.
+ * Built with TypeScript and react-native-svg for smooth rendering.
+ *
+ * @example
+ * ```tsx
+ * <DonutChart
+ *   slices={[
+ *     { percentage: 45, color: '#FF6384' },
+ *     { percentage: 55, color: '#36A2EB' }
+ *   ]}
+ *   size={250}
+ *   width={40}
+ *   gap={10}
+ * />
+ * ```
+ */
 export const DonutChart = ({ style, slices = [], width = 25, size = 350, gap, sort, border = 'butt', emptyColor = '#57595D' }) => {
     const slicesGap = useMemo(() => {
         if (gap !== undefined) {
@@ -35,7 +54,7 @@ export const DonutChart = ({ style, slices = [], width = 25, size = 350, gap, so
             return (_jsx(Circle, { cx: center, cy: center, r: radius, strokeWidth: width, stroke: emptyColor, originX: center, originY: center, strokeDasharray: circumference }));
         }
         return data.map(({ percent, color, angle }, index) => {
-            let strokeDashoffset = circumference * (1 - percent);
+            const strokeDashoffset = circumference * (1 - percent);
             return (_jsx(Circle, { cx: center, cy: center, r: radius, strokeWidth: width, stroke: color, strokeLinecap: border, originX: center, originY: center, strokeDashoffset: strokeDashoffset, strokeDasharray: circumference, transform: `rotate(${angle}, ${size / 2}, ${size / 2})`, fill: 'none' }, index));
         });
     }, [isEmptySlices, size, width, border, data]);

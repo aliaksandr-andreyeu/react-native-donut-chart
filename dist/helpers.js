@@ -1,3 +1,19 @@
+import { DonutChartSort } from './types';
+/** Validates slice data */
+export const validateSlices = (slices) => {
+    if (!Array.isArray(slices)) {
+        throw new TypeError('Slices must be an array');
+    }
+    slices.forEach((slice, index) => {
+        if (typeof slice.percentage !== 'number' || isNaN(slice.percentage)) {
+            throw new Error(`Slice ${index}: percentage must be a valid number`);
+        }
+        if (slice.percentage < 0) {
+            throw new Error(`Slice ${index}: percentage cannot be negative`);
+        }
+    });
+};
+/** Generates HSL color palette for auto-coloring */
 const generatePalette = (count) => {
     if (!count)
         return [];
@@ -8,20 +24,22 @@ const generatePalette = (count) => {
     }
     return palette;
 };
+/** Modifies slices by adding gaps and sorting */
 export const modifySlices = (data, gap, sort) => {
+    validateSlices(data);
     const sortFunc = (a, b) => {
         switch (sort) {
-            case sort === true:
-            case sort === "desc" /* DonutChartSort.DESC */:
+            case true:
+            case DonutChartSort.DESC:
                 return b.percentage - a.percentage;
-            case sort === "asc" /* DonutChartSort.ASC */:
+            case DonutChartSort.ASC:
                 return a.percentage - b.percentage;
             default:
                 return 0;
         }
     };
     const palette = generatePalette(data.length);
-    let slicesWithGap = [...data]
+    const slicesWithGap = [...data]
         .sort(sortFunc)
         .map((slice, index) => ({
         ...slice,
@@ -41,6 +59,7 @@ export const modifySlices = (data, gap, sort) => {
     }, []);
     return slicesWithGap;
 };
+/** Normalizes slices to ensure proper percentage distribution */
 export const normalizeSlices = (slices) => {
     const gaps = slices.filter((item) => item.gap === true);
     const totalGapSum = gaps.reduce((sum, item) => sum + item.percentage, 0);
@@ -64,7 +83,7 @@ export const normalizeSlices = (slices) => {
         };
     });
     const flooredSum = processed.reduce((sum, item) => sum + item.floor, 0);
-    let difference = availablePool - flooredSum;
+    const difference = availablePool - flooredSum;
     const sorted = [...processed].sort((a, b) => b.remainder - a.remainder);
     for (let i = 0; i < difference; i++) {
         sorted[i].floor++;
@@ -78,11 +97,12 @@ export const normalizeSlices = (slices) => {
     });
     return result;
 };
+/** Creates final donut slice data with angles */
 export const createDonutSlices = (data) => {
     const donutSlices = [];
     const total = data.reduce((previous, { percentage }) => previous + percentage, 0);
     let angle = 0;
-    data.forEach(({ percentage, color }, idx) => {
+    data.forEach(({ percentage, color }) => {
         const percent = percentage / (total || 1);
         donutSlices.push({
             percent,

@@ -6,17 +6,18 @@ A lightweight and customizable donut chart component for React Native. Built wit
 
 ## ✨ Features
 
-- **Smooth & Animated** — Utilizes `react-native-svg` for crisp, scalable rendering.
-- **Configurable Gaps** — Adjust the spacing between donut slices, or let the component handle it automatically.
-- **Smart Sorting** — Sort slices in ascending or descending order based on their percentage values.
-- **Auto-generated Colors** — Automatically generates a visually appealing HSL palette if no colors are provided.
-- **Customizable** — Full control over size, stroke width, border style, and more.
-- **Lightweight** — Minimal dependencies, easy to integrate into any React Native project.
-- **TypeScript Support** — Fully typed for a better developer experience.
+- **Smooth & Animated** - Utilizes `react-native-svg` for crisp, scalable rendering.
+- **Configurable Gaps** - Adjust the spacing between donut slices, or let the component handle it automatically.
+- **Smart Sorting** - Sort slices in ascending or descending order based on their percentage values.
+- **Auto-generated Colors** - Automatically generates a visually appealing HSL palette if no colors are provided.
+- **Customizable** - Full control over size, stroke width, border style, and more.
+- **Lightweight** - Minimal dependencies, easy to integrate into any React Native project.
+- **TypeScript Support** - Fully typed for a better developer experience.
 
 ## 📦 Installation
 
 1.  Install the library and its required peer dependency:
+
     ```bash
     # npm
     npm install react-native-donut-chart react-native-svg
@@ -86,33 +87,114 @@ To run the project locally and contribute:
 
 1. Clone the repository:
 
-    ```bash
-    git clone https://github.com/aliaksandr-andreyeu/react-native-donut-chart.git
-    cd react-native-donut-chart
-    git checkout development
-    ```
+   ```bash
+   git clone https://github.com/aliaksandr-andreyeu/react-native-donut-chart.git
+   cd react-native-donut-chart
+   git checkout development
+   ```
 
 2. Install dependencies:
 
-    ```bash
-    yarn install
-    # or
-    npm install
-    ```
+   ```bash
+   yarn install
+   # or
+   npm install
+   ```
 
-3. Make your changes in the src/ directory.
+3. Run tests:
 
-4. Build the project:
+   ```bash
+   npm test          # Run tests once
+   npm run test:watch # Run tests in watch mode
+   ```
 
-    ```bash
-    yarn build
-    # or
-    npm run build
-    ```
+4. Lint and format code:
+
+   ```bash
+   npm run lint       # Check for linting errors
+   npm run lint:fix   # Fix linting errors
+   npm run prettier   # Check code formatting
+   npm run prettier:fix # Format code
+   ```
+
+5. Build the project:
+
+   ```bash
+   npm run build
+   ```
+
+6. View the example app:
+
+   ```bash
+   # See example/App.tsx for usage examples
+   ```
+
+## 🎨 Supported Color Formats
+
+The `color` property supports any valid React Native color format:
+
+- **Hex**: `#FF6384`, `#F63`
+- **RGB**: `rgb(255, 99, 132)`
+- **HSL**: `hsl(360, 100%, 50%)`
+- **Named**: `red`, `blue`, `green`, etc.
+
+## 📦 Auto-generated Colors
+
+If you don't provide colors, they will be auto-generated using an HSL palette:
+
+- Colors are evenly distributed across the hue spectrum
+- Saturation: 100%
+- Lightness: 60%
+
+Example:
+
+```tsx
+const data = [
+  { percentage: 50 }, // Auto color 1
+  { percentage: 30 }, // Auto color 2
+  { percentage: 20, color: '#FF0000' } // Custom color
+];
+```
+
+## 🔧 TypeScript Support
+
+This library is fully typed with TypeScript. All types are exported for your convenience:
+
+```tsx
+import { DonutChart, DonutChartProps, DonutChartSlice, DonutChartSort } from 'react-native-donut-chart';
+```
+
+## 🐛 Troubleshooting
+
+**Issue**: Chart doesn't render
+
+- Ensure `slices` array is not empty
+- Check that percentages are positive numbers
+- Verify `react-native-svg` is properly installed
+
+**Issue**: Colors aren't showing
+
+- Check that color values are valid React Native colors
+- Ensure no conflicting CSS/style rules
+- Try using hex format (`#FF6384`) for best compatibility
+
+**Issue**: Tests fail
+
+- Run `npm install` to ensure all dev dependencies are installed
+- Clear Jest cache: `npm test -- --clearCache`
+- Check Node version (recommended: 18+)
+
+## 📊 Development Stack
+
+- **TypeScript** — Type-safe development
+- **Jest** — Unit testing
+- **ESLint** — Code linting
+- **Prettier** — Code formatting
+- **react-native-svg** — SVG rendering
 
 ## 📄 License
-This project is licensed under the MIT License. See the LICENSE file for details.
 
+This project is licensed under the MIT License. See the LICENSE file for details.
 
 ## 👤 Author
 
