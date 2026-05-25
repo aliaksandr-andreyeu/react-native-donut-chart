@@ -87,47 +87,47 @@ To run the project locally and contribute:
 
 1. Clone the repository:
 
-    ```bash
-    git clone https://github.com/aliaksandr-andreyeu/react-native-donut-chart.git
-    cd react-native-donut-chart
-    git checkout development
-    ```
+   ```bash
+   git clone https://github.com/aliaksandr-andreyeu/react-native-donut-chart.git
+   cd react-native-donut-chart
+   git checkout development
+   ```
 
 2. Install dependencies:
 
-    ```bash
-    yarn install
-    # or
-    npm install
-    ```
+   ```bash
+   yarn install
+   # or
+   npm install
+   ```
 
 3. Run tests:
 
-    ```bash
-    npm test          # Run tests once
-    npm run test:watch # Run tests in watch mode
-    ```
+   ```bash
+   npm test          # Run tests once
+   npm run test:watch # Run tests in watch mode
+   ```
 
 4. Lint and format code:
 
-    ```bash
-    npm run lint       # Check for linting errors
-    npm run lint:fix   # Fix linting errors
-    npm run prettier   # Check code formatting
-    npm run prettier:fix # Format code
-    ```
+   ```bash
+   npm run lint       # Check for linting errors
+   npm run lint:fix   # Fix linting errors
+   npm run prettier   # Check code formatting
+   npm run prettier:fix # Format code
+   ```
 
 5. Build the project:
 
-    ```bash
-    npm run build
-    ```
+   ```bash
+   npm run build
+   ```
 
 6. View the example app:
 
-    ```bash
-    # See example/App.tsx for usage examples
-    ```
+   ```bash
+   # See example/App.tsx for usage examples
+   ```
 
 ## 🎨 Supported Color Formats
 
@@ -150,9 +150,9 @@ Example:
 
 ```tsx
 const data = [
-    { percentage: 50 }, // Auto color 1
-    { percentage: 30 }, // Auto color 2
-    { percentage: 20, color: '#FF0000' }, // Custom color
+  { percentage: 50 }, // Auto color 1
+  { percentage: 30 }, // Auto color 2
+  { percentage: 20, color: '#FF0000' } // Custom color
 ];
 ```
 
@@ -161,12 +161,7 @@ const data = [
 This library is fully typed with TypeScript. All types are exported for your convenience:
 
 ```tsx
-import {
-    DonutChart,
-    DonutChartProps,
-    DonutChartSlice,
-    DonutChartSort,
-} from 'react-native-donut-chart';
+import { DonutChart, DonutChartProps, DonutChartSlice, DonutChartSort } from 'react-native-donut-chart';
 ```
 
 ## 🐛 Troubleshooting

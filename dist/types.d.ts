@@ -10,8 +10,8 @@ export interface DonutChartData {
     angle: number;
 }
 export declare enum DonutChartSort {
-    ASC = 'asc',
-    DESC = 'desc',
+    ASC = "asc",
+    DESC = "desc"
 }
 /** Single slice configuration */
 export interface DonutChartSlice {
