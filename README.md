@@ -6,13 +6,13 @@ A lightweight, customizable, and animated donut chart component for React Native
 
 ## ✨ Features
 
-- **Smooth & Animated** — Utilizes `react-native-svg` for crisp, scalable rendering.
-- **Configurable Gaps** — Adjust the spacing between donut slices, or let the component handle it automatically.
-- **Smart Sorting** — Sort slices in ascending or descending order based on their percentage values.
-- **Auto-generated Colors** — Automatically generates a visually appealing HSL palette if no colors are provided.
-- **Customizable** — Full control over size, stroke width, border style, and more.
-- **Lightweight** — Minimal dependencies, easy to integrate into any React Native project.
-- **TypeScript Support** — Fully typed for a better developer experience.
+- **Smooth & Animated** - Utilizes `react-native-svg` for crisp, scalable rendering.
+- **Configurable Gaps** - Adjust the spacing between donut slices, or let the component handle it automatically.
+- **Smart Sorting** - Sort slices in ascending or descending order based on their percentage values.
+- **Auto-generated Colors** - Automatically generates a visually appealing HSL palette if no colors are provided.
+- **Customizable** - Full control over size, stroke width, border style, and more.
+- **Lightweight** - Minimal dependencies, easy to integrate into any React Native project.
+- **TypeScript Support** - Fully typed for a better developer experience.
 
 ## 📦 Installation
 
