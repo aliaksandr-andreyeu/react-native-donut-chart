@@ -1,6 +1,6 @@
 # React Native Donut Chart
 
-A lightweight, customizable, and animated donut chart component for React Native. Built with TypeScript and `react-native-svg`, it offers smooth rendering, configurable gaps between slices, and automatic color palette generation.
+A lightweight and customizable donut chart component for React Native. Built with TypeScript and `react-native-svg`, it offers smooth rendering, configurable gaps between slices, and automatic color palette generation.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
