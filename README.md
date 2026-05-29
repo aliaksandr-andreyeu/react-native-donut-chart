@@ -186,11 +186,11 @@ import { DonutChart, DonutChartProps, DonutChartSlice, DonutChartSort } from 're
 
 ## 📊 Development Stack
 
-- **TypeScript** — Type-safe development
-- **Jest** — Unit testing
-- **ESLint** — Code linting
-- **Prettier** — Code formatting
-- **react-native-svg** — SVG rendering
+- **TypeScript** - Type-safe development
+- **Jest** - Unit testing
+- **ESLint** - Code linting
+- **Prettier** - Code formatting
+- **react-native-svg** - SVG rendering
 
 ## 📄 License
 
