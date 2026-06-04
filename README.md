@@ -20,10 +20,10 @@ A lightweight and customizable donut chart component for React Native. Built wit
 
     ```bash
     # npm
-    npm install react-native-donut-chart react-native-svg
+    npm install github:aliaksandr-andreyeu/react-native-donut-chart react-native-svg
 
     # yarn
-    yarn add react-native-donut-chart react-native-svg
+    yarn add github:aliaksandr-andreyeu/react-native-donut-chart react-native-svg
     ```
 
 2.  If you're on iOS, run:
