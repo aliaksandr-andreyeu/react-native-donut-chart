@@ -1,10 +1,9 @@
 {
   "compilerOptions": {
-    "ignoreDeprecations": "6.0",
     "declaration": true,
     "jsx": "react-jsx",
     "module": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "node10",
     "target": "ESNext",
     "outDir": "./dist",
     "rootDir": "./src",

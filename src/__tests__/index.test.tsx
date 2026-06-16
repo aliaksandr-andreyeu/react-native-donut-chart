@@ -1,7 +1,8 @@
-import React from 'react';
-import TestRenderer, { ReactTestInstance } from 'react-test-renderer';
+import TestRenderer, { ReactTestInstance, ReactTestRenderer, act } from 'react-test-renderer';
 import { DonutChart } from '../index';
 import { DonutChartProps } from '../types';
+
+(globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
 
 // react-native and react-native-svg are mocked to plain host components so the
 // component can render under jest's node test environment without the full RN
@@ -18,10 +19,16 @@ jest.mock('react-native-svg', () => ({
   G: 'G'
 }));
 
-const renderChart = (props: DonutChartProps): ReactTestInstance =>
-  TestRenderer.create(<DonutChart {...props} />).root;
+const renderChart = (props: DonutChartProps): ReactTestInstance => {
+  let renderer: ReactTestRenderer;
+  act(() => {
+    renderer = TestRenderer.create(<DonutChart {...props} />);
+  });
+  return renderer!.root;
+};
 
-const getCircles = (root: ReactTestInstance): ReactTestInstance[] => root.findAllByType('Circle');
+const getCircles = (root: ReactTestInstance): ReactTestInstance[] =>
+  root.findAll((node) => (node.type as unknown as string) === 'Circle');
 
 describe('DonutChart', () => {
   describe('empty state', () => {
