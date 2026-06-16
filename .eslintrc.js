@@ -10,7 +10,7 @@ module.exports = {
   },
   rules: {
     '@typescript-eslint/no-unused-vars': 'error',
-    '@typescript-eslint/explicit-function-return-types': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
     semi: ['error', 'always'],
     quotes: ['error', 'single'],
     'prefer-const': 'warn'

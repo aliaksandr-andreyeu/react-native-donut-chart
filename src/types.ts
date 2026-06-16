@@ -16,13 +16,21 @@ export enum DonutChartSort {
   DESC = 'desc'
 }
 
-/** Single slice configuration */
+/** Single slice configuration (public API) */
 export interface DonutChartSlice {
-  /** Percentage value (0-100+) */
+  /** Percentage value (0-100+); slices are normalized proportionally */
   percentage: number;
   /** Optional hex/rgb/hsl color. Auto-generated if omitted */
   color?: ColorValue;
-  /** Internal flag for gap slices */
+}
+
+/**
+ * Slice shape used internally while building the chart — adds the gap marker.
+ *
+ * @internal Not part of the public API; consumers should use {@link DonutChartSlice}.
+ */
+export interface InternalDonutSlice extends DonutChartSlice {
+  /** Internal flag marking a transparent gap segment */
   gap?: boolean;
 }
 
@@ -34,7 +42,7 @@ export interface DonutChartProps {
   size?: number;
   /** Ring thickness in pixels (default: 25) */
   width?: number;
-  /** Gap between slices in pixels (auto-calculated if omitted) */
+  /** Gap between slices, in percentage points of the ring (auto-calculated if omitted) */
   gap?: number;
   /** Stroke line cap style (default: 'butt') */
   border?: Linecap;

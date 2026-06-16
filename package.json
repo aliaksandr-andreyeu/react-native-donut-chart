@@ -22,9 +22,11 @@
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write \"./**/*.{js,jsx,cjs,mjs,ts,tsx,json}\"",
-    "postinstall": "typesync",
+    "typecheck": "tsc --noEmit",
+    "typesync": "typesync",
     "build": "tsc",
-    "prepublishOnly": "npm run lint && npm run test && npm run build"
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run lint && npm run typecheck && npm run test && npm run build"
   },
   "repository": {
     "type": "git",
@@ -62,13 +64,15 @@
     "react": "19.2.5",
     "react-native": "0.85.0",
     "react-native-svg": "15.15.5",
+    "react-test-renderer": "19.2.5",
+    "@types/react-test-renderer": "^19.0.0",
     "ts-jest": "^29.1.0",
     "typescript": "5.9.3",
     "typesync": "0.14.3"
   },
   "peerDependencies": {
-    "react": "*",
-    "react-native": "*",
-    "react-native-svg": "*"
+    "react": ">=18.0.0",
+    "react-native": ">=0.70.0",
+    "react-native-svg": ">=13.0.0"
   }
 }

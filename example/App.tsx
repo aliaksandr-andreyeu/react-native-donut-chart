@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, StyleSheet, Text, ScrollView } from 'react-native';
-import { DonutChart } from '../src/index';
+import { DonutChart, DonutChartSort } from '../src/index';
 
 /**
  * Example app demonstrating DonutChart usage
  */
 export default function App(): React.ReactElement {
-  const [selectedSlice] = useState<number | null>(null);
-
   const data = [
     { percentage: 45, color: '#FF6384' },
     { percentage: 30, color: '#36A2EB' },
@@ -49,7 +47,7 @@ export default function App(): React.ReactElement {
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Sorted Descending</Text>
         <View style={styles.chartContainer}>
-          <DonutChart slices={data} size={250} width={40} gap={10} sort={false} border='square' />
+          <DonutChart slices={data} size={250} width={40} gap={10} sort={DonutChartSort.DESC} border='square' />
         </View>
       </View>
 
@@ -60,12 +58,6 @@ export default function App(): React.ReactElement {
           <DonutChart slices={[]} size={250} width={40} emptyColor='#E0E0E0' />
         </View>
       </View>
-
-      {selectedSlice !== null && (
-        <Text style={styles.selected}>
-          Selected: Slice {selectedSlice} ({data[selectedSlice].percentage}%)
-        </Text>
-      )}
     </ScrollView>
   );
 }

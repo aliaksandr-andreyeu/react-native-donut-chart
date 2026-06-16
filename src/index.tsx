@@ -4,6 +4,8 @@ import Svg, { Circle, G } from 'react-native-svg';
 import { DonutChartProps } from './types';
 import { modifySlices, normalizeSlices, createDonutSlices } from './helpers';
 
+declare const __DEV__: boolean;
+
 /**
  * DonutChart Component
  *
@@ -54,11 +56,18 @@ export const DonutChart: FC<DonutChartProps> = ({
       return [];
     }
 
-    const modifiedData = modifySlices(slices, slicesGap, sort);
-    const normalizedData = normalizeSlices(modifiedData);
-    const donutData = createDonutSlices(normalizedData);
-
-    return donutData;
+    try {
+      const modifiedData = modifySlices(slices, slicesGap, sort);
+      const normalizedData = normalizeSlices(modifiedData);
+      return createDonutSlices(normalizedData);
+    } catch (error) {
+      // Degrade to the empty state rather than crashing the render tree.
+      if (typeof __DEV__ !== 'undefined' && __DEV__) {
+        // eslint-disable-next-line no-console
+        console.warn('[DonutChart] Ignoring invalid slices:', error);
+      }
+      return [];
+    }
   }, [isEmptySlices, slices, sort, slicesGap]);
 
   const circle = useMemo(() => {
@@ -67,7 +76,7 @@ export const DonutChart: FC<DonutChartProps> = ({
 
     const circumference = 2 * Math.PI * radius;
 
-    if (isEmptySlices) {
+    if (data.length === 0) {
       return (
         <Circle
           cx={center}
@@ -78,6 +87,7 @@ export const DonutChart: FC<DonutChartProps> = ({
           originX={center}
           originY={center}
           strokeDasharray={circumference}
+          fill={'none'}
         />
       );
     }
@@ -102,7 +112,7 @@ export const DonutChart: FC<DonutChartProps> = ({
         />
       );
     });
-  }, [isEmptySlices, size, width, border, data]);
+  }, [size, width, border, data, emptyColor]);
 
   return (
     <View
@@ -135,3 +145,6 @@ const styles = StyleSheet.create<Styles>({
     alignItems: 'center'
   }
 });
+
+export { DonutChartSort } from './types';
+export type { DonutChartProps, DonutChartSlice, DonutChartData } from './types';
