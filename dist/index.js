@@ -41,23 +41,32 @@ export const DonutChart = ({ style, slices = [], width = 25, size = 350, gap, so
         if (isEmptySlices) {
             return [];
         }
-        const modifiedData = modifySlices(slices, slicesGap, sort);
-        const normalizedData = normalizeSlices(modifiedData);
-        const donutData = createDonutSlices(normalizedData);
-        return donutData;
+        try {
+            const modifiedData = modifySlices(slices, slicesGap, sort);
+            const normalizedData = normalizeSlices(modifiedData);
+            return createDonutSlices(normalizedData);
+        }
+        catch (error) {
+            // Degrade to the empty state rather than crashing the render tree.
+            if (typeof __DEV__ !== 'undefined' && __DEV__) {
+                // eslint-disable-next-line no-console
+                console.warn('[DonutChart] Ignoring invalid slices:', error);
+            }
+            return [];
+        }
     }, [isEmptySlices, slices, sort, slicesGap]);
     const circle = useMemo(() => {
         const center = size / 2;
         const radius = (size - width) / 2;
         const circumference = 2 * Math.PI * radius;
-        if (isEmptySlices) {
-            return (_jsx(Circle, { cx: center, cy: center, r: radius, strokeWidth: width, stroke: emptyColor, originX: center, originY: center, strokeDasharray: circumference }));
+        if (data.length === 0) {
+            return (_jsx(Circle, { cx: center, cy: center, r: radius, strokeWidth: width, stroke: emptyColor, originX: center, originY: center, strokeDasharray: circumference, fill: 'none' }));
         }
         return data.map(({ percent, color, angle }, index) => {
             const strokeDashoffset = circumference * (1 - percent);
             return (_jsx(Circle, { cx: center, cy: center, r: radius, strokeWidth: width, stroke: color, strokeLinecap: border, originX: center, originY: center, strokeDashoffset: strokeDashoffset, strokeDasharray: circumference, transform: `rotate(${angle}, ${size / 2}, ${size / 2})`, fill: 'none' }, index));
         });
-    }, [isEmptySlices, size, width, border, data]);
+    }, [size, width, border, data, emptyColor]);
     return (_jsx(View, { style: [
             styles.container,
             {
@@ -74,4 +83,5 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     }
 });
+export { DonutChartSort } from './types';
 //# sourceMappingURL=index.js.map

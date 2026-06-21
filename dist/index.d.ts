@@ -20,3 +20,5 @@ import { DonutChartProps } from './types';
  * ```
  */
 export declare const DonutChart: FC<DonutChartProps>;
+export { DonutChartSort } from './types';
+export type { DonutChartProps, DonutChartSlice, DonutChartData } from './types';

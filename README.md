@@ -16,15 +16,19 @@ A lightweight and customizable donut chart component for React Native. Built wit
 
 ## 📦 Installation
 
-1.  Install the library and its required peer dependency:
+> This package is distributed via GitHub and is **not published to the npm registry**. Install it directly from the repository.
+
+1.  Install the library (from GitHub) and its required peer dependency:
 
     ```bash
     # npm
-    npm install react-native-donut-chart react-native-svg
+    npm install github:aliaksandr-andreyeu/react-native-donut-chart react-native-svg
 
     # yarn
-    yarn add react-native-donut-chart react-native-svg
+    yarn add aliaksandr-andreyeu/react-native-donut-chart react-native-svg
     ```
+
+    To pin a specific version, append a tag, branch, or commit, e.g. `github:aliaksandr-andreyeu/react-native-donut-chart#main`.
 
 2.  If you're on iOS, run:
     ```bash
@@ -75,7 +79,7 @@ Here is a simple example to get you started:
 
 ## ⚙️ Props
 
-<table><thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>slices</code></td><td><code>DonutChartSlice[]</code></td><td><code>[]</code></td><td><strong>Required</strong>. An array of data objects for each slice. See <code>DonutChartSlice</code> definition below.</td></tr><tr><td><code>size</code></td><td><code>number</code></td><td><code>350</code></td><td>The width and height of the chart in pixels.</td></tr><tr><td><code>width</code></td><td><code>number</code></td><td><code>25</code></td><td>The thickness of the donut ring in pixels.</td></tr><tr><td><code>gap</code></td><td><code>number</code></td><td><em>auto</em></td><td>The size of the gap between slices in pixels. If not provided, it's calculated based on <code>width</code> and <code>border</code>.</td></tr><tr><td><code>border</code></td><td><code>'butt' | 'round' | 'square'</code></td><td><code>'butt'</code></td><td>The shape of the stroke endings (linecap) for each slice. Affects default gap calculation.</td></tr><tr><td><code>sort</code></td><td><code>'asc' | 'desc' | boolean</code></td><td><code>false</code></td><td>Sorts the slices. <code>true</code> or <code>'desc'</code> for descending order, <code>'asc'</code> for ascending.</td></tr><tr><td><code>emptyColor</code></td><td><code>ColorValue</code></td><td><code>'#57595D'</code></td><td>The color used for the chart when the <code>slices</code> array is empty.</td></tr><tr><td><code>style</code></td><td><code>ViewStyle | ViewStyle[]</code></td><td><code>{}</code></td><td>Additional styles for the container <code>View</code>.</td></tr></tbody></table>
+<table><thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>slices</code></td><td><code>DonutChartSlice[]</code></td><td><code>[]</code></td><td><strong>Required</strong>. An array of data objects for each slice. See <code>DonutChartSlice</code> definition below.</td></tr><tr><td><code>size</code></td><td><code>number</code></td><td><code>350</code></td><td>The width and height of the chart in pixels.</td></tr><tr><td><code>width</code></td><td><code>number</code></td><td><code>25</code></td><td>The thickness of the donut ring in pixels.</td></tr><tr><td><code>gap</code></td><td><code>number</code></td><td><em>auto</em></td><td>The size of the gap between slices, in percentage points of the ring. If not provided, it's calculated based on <code>width</code> and <code>border</code>.</td></tr><tr><td><code>border</code></td><td><code>'butt' | 'round' | 'square'</code></td><td><code>'butt'</code></td><td>The shape of the stroke endings (linecap) for each slice. Affects default gap calculation.</td></tr><tr><td><code>sort</code></td><td><code>'asc' | 'desc' | boolean</code></td><td><code>false</code></td><td>Sorts the slices. <code>true</code> or <code>'desc'</code> for descending order, <code>'asc'</code> for ascending.</td></tr><tr><td><code>emptyColor</code></td><td><code>ColorValue</code></td><td><code>'#57595D'</code></td><td>The color used for the chart when the <code>slices</code> array is empty.</td></tr><tr><td><code>style</code></td><td><code>ViewStyle | ViewStyle[]</code></td><td><code>{}</code></td><td>Additional styles for the container <code>View</code>.</td></tr></tbody></table>
 
 ### `DonutChartSlice` Object
 

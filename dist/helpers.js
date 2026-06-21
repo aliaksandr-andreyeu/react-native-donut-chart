@@ -59,43 +59,33 @@ export const modifySlices = (data, gap, sort) => {
     }, []);
     return slicesWithGap;
 };
-/** Normalizes slices to ensure proper percentage distribution */
+/**
+ * Normalizes slices so that real slices + gap segments sum to 100%.
+ *
+ * Gap segments keep their fixed size; the remaining room is shared between the
+ * real slices proportionally to their values. Fractional precision is preserved
+ * (no integer rounding and no forced minimum per slice).
+ */
 export const normalizeSlices = (slices) => {
-    const gaps = slices.filter((item) => item.gap === true);
-    const totalGapSum = gaps.reduce((sum, item) => sum + item.percentage, 0);
-    const sliceItems = slices.map((item, originalIndex) => ({ ...item, originalIndex })).filter((item) => !item.gap);
+    const sliceItems = slices.filter((item) => !item.gap);
     const nSlices = sliceItems.length;
     if (nSlices === 0)
         return slices;
+    const totalGapSum = slices.filter((item) => item.gap === true).reduce((sum, item) => sum + item.percentage, 0);
     const availablePercentage = 100 - totalGapSum;
-    if (availablePercentage < nSlices) {
-        throw new Error(`Not enough percentages in 100% for slices: needed ${nSlices}%, available ${availablePercentage}%`);
+    // Gaps leave no room for slices — drop the gaps and render slices edge-to-edge
+    // instead of throwing inside the render path.
+    if (availablePercentage <= 0) {
+        return sliceItems;
     }
-    const availablePool = availablePercentage - nSlices;
     const slicesPercentageTotal = sliceItems.reduce((sum, item) => sum + item.percentage, 0);
-    const processed = sliceItems.map((item) => {
+    return slices.map((item) => {
+        if (item.gap) {
+            return item;
+        }
         const ratio = slicesPercentageTotal === 0 ? 1 / nSlices : item.percentage / slicesPercentageTotal;
-        const precise = ratio * availablePool;
-        return {
-            ...item,
-            floor: Math.floor(precise),
-            remainder: precise - Math.floor(precise)
-        };
+        return { ...item, percentage: ratio * availablePercentage };
     });
-    const flooredSum = processed.reduce((sum, item) => sum + item.floor, 0);
-    const difference = availablePool - flooredSum;
-    const sorted = [...processed].sort((a, b) => b.remainder - a.remainder);
-    for (let i = 0; i < difference; i++) {
-        sorted[i].floor++;
-    }
-    const result = [...slices];
-    processed.forEach((item) => {
-        result[item.originalIndex] = {
-            ...slices[item.originalIndex],
-            percentage: 1 + item.floor
-        };
-    });
-    return result;
 };
 /** Creates final donut slice data with angles */
 export const createDonutSlices = (data) => {
